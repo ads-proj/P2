@@ -6,6 +6,7 @@
 #include "LeftistHeap.h"
 #include "SkewHeap.h"
 #include "normalHeap.h"
+#include "FibonacciHeap.h"
 #include "Node.h"
 struct Edge{
     int v,w,next;

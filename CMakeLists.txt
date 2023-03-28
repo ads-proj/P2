@@ -10,4 +10,4 @@ add_executable(P2
         main.cpp
         SkewHeap.h
         NormalHeap.h
-        Node.h)
+        Node.h FibonacciHeap.h)
