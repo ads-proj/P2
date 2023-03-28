@@ -22,7 +22,7 @@ private:
     Node* root;
 public:
     SkewHeap():root(NULL){};
-
+    bool isEmpty(){return root== nullptr;}
     void insert(const T&x);
     void deleteMin();
     T getMin();
@@ -54,6 +54,7 @@ void SkewHeap<T>::insert(const T &x) {
 
 template<typename T>
 void SkewHeap<T>::del(SkewHeap::Node *a) {
+    if(a== nullptr) return;
     if(a->right!= nullptr) del(a->right);
     if(a->left!= nullptr) del(a->left);
     delete a;

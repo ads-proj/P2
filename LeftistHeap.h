@@ -23,7 +23,7 @@ private:
     Node* root;
 public:
     LeftistHeap():root(NULL){};
-
+    bool isEmpty(){return root== nullptr;}
     void insert(const T&x);
     void deleteMin();
     ~LeftistHeap(){
@@ -56,6 +56,7 @@ void LeftistHeap<T>::insert(const T &x) {
 
 template<typename T>
 void LeftistHeap<T>::del(LeftistHeap::Node *a) {
+    if(a== nullptr) return;
     if(a->right!= nullptr) del(a->right);
     if(a->left!= nullptr) del(a->left);
     delete a;

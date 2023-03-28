@@ -20,6 +20,7 @@ public:
     void insert(const T& t);
     T getMin();
     void deleteMin();
+    bool isEmpty(){return data.size()==1;}
 };
 
 template<typename T>
