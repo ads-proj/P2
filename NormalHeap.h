@@ -8,78 +8,89 @@
 #include "algorithm"
 #include "vector"
 using namespace std;
+
 template <typename T>
 class NormalHeap {
 private:
-    std::vector<T> data;
-    void perlocateUp(int idx);
-    void perlocateDown(int idx);
-
+    std::vector<T> data; 
+    //move an element up to the appropriate position
+    void perlocateUp(int idx); 
+    //move an element down to the appropriate position
+    void perlocateDown(int idx); 
 public:
-    NormalHeap();
-    void insert(const T& t);
-    T getMin();
-    void deleteMin();
-    bool isEmpty(){return data.size()==1;}
+    // constructor
+    NormalHeap(); 
+    // function to insert a new element in the heap
+    void insert(const T& t); 
+    // function to return the minimum element in the heap
+    T getMin(); 
+    // function to delete the minimum element in the heap
+    void deleteMin(); 
+    // function to check whether the heap is empty or not
+    bool isEmpty(){return data.size()==1;} 
 };
 
 template<typename T>
 void NormalHeap<T>::insert(const T &t) {
-    data.push_back(t);
-    perlocateDown(data.size()-1);
+    // add the new element to the end of the vector
+    data.push_back(t); 
+    // move the element up to the appropriate position
+    perlocateUp(data.size()-1); 
 }
 
 template<typename T>
 void NormalHeap<T>::perlocateUp(int idx) {
     int i;
-    T tmp = data[idx];
-    //judge whether the father node's length is smaller than its
-    //length and adjust it to the nearest ancestor whose length smalller than it.
+    // save the element that needs to be moved up
+    T tmp = data[idx]; 
+    // move the element up to the appropriate position by comparing with its parent
     for (i = idx; data[i / 2]> tmp; i /= 2)
-        data[i] = data[i / 2];
+    data[i] = data[i / 2];
     data[i] = tmp;
 }
 
 template<typename T>
 void NormalHeap<T>::perlocateDown(int idx) {
     int i, child;
-    T tmp = data[idx];
-    //judge whether the children node's length is smaller than it.
-    //length and adjust it to the nearest children whose length all bigger than it.
+    // save the element that needs to be moved down
+    T tmp = data[idx]; 
+    // move the element down to the appropriate position by comparing with its children
     for (i = idx; i * 2 <= data.size()-1; i = child)
     {
-        //find the child index
+        // find the index of the smaller child
         child = i * 2;
-        //find the smaller child index
         if (child != data.size() && data[child + 1] < data[child])
             child++;
-        //judge whether the child is smaller than it
+        // move the element down if its child is smaller than it
         if (data[child] < tmp)
-            //adjust the heap
             data[i] = data[child];
         else
-            //if adjust finish return
             break;
     }
-    data[i] = tmp;
+    // put the saved element in the appropriate position
+    data[i] = tmp; 
 }
 
 template<typename T>
 T NormalHeap<T>::getMin() {
-    return data[1];
+    // return the minimum element in the heap
+    return data[1]; 
 }
 
 template<typename T>
 void NormalHeap<T>::deleteMin() {
-    data[1]=data[data.size()-1];
-    data.pop_back();
-    perlocateDown(1);
+    // replace the root element with the last element
+    data[1]=data[data.size()-1]; 
+    // remove the last element in the vector
+    data.pop_back(); 
+    // move the root element down to the appropriate position
+    perlocateDown(1); 
 }
 
 template<typename T>
 NormalHeap<T>::NormalHeap() {
-    data.push_back(T());
+    // initialize the vector with a dummy element
+    data.push_back(T()); 
 }
-
 
 #endif //P2_NORMALHEAP_H
